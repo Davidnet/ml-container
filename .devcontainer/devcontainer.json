@@ -1,0 +1,28 @@
+{
+    "name": "ml-container",
+    "dockerFile": "Dockerfile",
+
+    // Specifies a list of ports that should be published from the container.
+    "appPort": [6006, 8888],
+
+    // Pass the runArg to the Dockerfile container
+    "runArgs": ["-u", "vscode"],
+
+    // Use 'settings' to set *default* container specific settings.json values on container create.
+    // You can edit these settings after create using File > Preferences > Settings > Remote.
+    "settings": {
+        "terminal.integrated.shell.linux": "/bin/bash",
+        "python.pythonPath": "/usr/local/bin/python",
+        "python.linting.pylintEnabled": true,
+        "python.linting.pylintPath": "/usr/local/bin/pylint",
+        "python.linting.enabled": true
+    },
+
+    // Specifies a command to run after the container is created
+    "postCreateCommand": "sudo -H pip install -r requirements.txt && jupyter serverextension enable --py jupyter_http_over_ws",
+
+    "extensions": [
+        "ms-python.python"
+    ]
+
+}
